@@ -3,6 +3,7 @@
 // ALL SHOULD RETURN TRUE
 // http://localhost:3000/api/env-check
 
+// The GET function is the handler for GET requests to this API route.
 export async function GET() {
     return Response.json({
         hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,

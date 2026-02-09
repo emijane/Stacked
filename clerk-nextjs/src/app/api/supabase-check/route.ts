@@ -4,6 +4,8 @@
 
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
+// The GET function is the handler for GET requests to this API route. 
+// It performs a simple query to the "profiles" table, selecting the "id" column and limiting the results to 1 record.
 export async function GET() {
     const result = await supabaseAdmin
         .from("profiles")

@@ -5,6 +5,12 @@
 
 import { useEffect } from "react";
 
+// The EnsureProfile component is a client-side React component that uses the useEffect 
+// hook to trigger a side effect when the component mounts. 
+// In this case, the side effect is a fetch request to the /api/profile/ensure endpoint with the POST method. 
+// This request is intended to ensure that a user profile exists for the authenticated user. 
+// The component does not render any UI and returns null, as its sole purpose is to perform this side effect 
+// when included in a page or layout.
 export default function EnsureProfile() {
     useEffect(() => {
         fetch("/api/profile/ensure", { method: "POST" });

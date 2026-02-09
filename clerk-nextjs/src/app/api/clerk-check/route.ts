@@ -5,6 +5,9 @@
 
 import { auth } from "@clerk/nextjs/server";
 
+// The GET function is the handler for GET requests to this API route.
+// In production, we return a 404 Not Found response to avoid exposing authentication status.
+// In development, we check the authentication status and return it in the response for debugging purposes.
 export async function GET() {
     if (process.env.NODE_ENV === "production") {
         return new Response("Not found", { status: 404 });

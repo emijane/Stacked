@@ -1,6 +1,7 @@
 // This API route checks if the necessary Supabase environment variables are set.
 // It returns a JSON object indicating which variables are present. This can be used for debugging and ensuring that the environment is properly configured.
 // ALL SHOULD RETURN TRUE
+// http://localhost:3000/api/env-check
 
 export async function GET() {
     return Response.json({

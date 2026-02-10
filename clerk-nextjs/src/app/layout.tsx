@@ -9,6 +9,7 @@ import {
 } from '@clerk/nextjs'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import { NavigationMenuComponent } from '@/components/header/NavigationMenu'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,6 +36,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <header className="flex justify-end items-center p-4 gap-4 h-16">
+            <NavigationMenuComponent/>
             {/* Show the sign-in and sign-up buttons when the user is signed out */}
             <SignedOut>
               <SignInButton />

@@ -60,7 +60,7 @@ export default function ProfileSettingsForm(props: Props) {
 
     return (
         <div className="p-6 max-w-2xl">
-            <h1 className="text-2xl font-semibold">Player Profile</h1>
+            <h1 className="text-2xl font-semibold text-red-500">Player Profile</h1>
             <p className="mt-2 opacity-80">
                 Manage your profile settings.
             </p>

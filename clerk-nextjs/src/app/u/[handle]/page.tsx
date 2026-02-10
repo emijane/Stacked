@@ -1,7 +1,11 @@
+// This is the public profile page that can be accessed via /u/[handle]. 
+// It fetches the profile data from the API route we defined earlier and displays it.
+
 type Region = "NA" | "EU" | "APAC";
 type Role = "Tank" | "DPS" | "Support";
 type Platform = "PC" | "Console";
 
+// Define the structure of the API response for better type safety and clarity in the component.
 type ApiResponse = {
     ok: boolean;
     error?: string;
@@ -19,20 +23,29 @@ type ApiResponse = {
     platforms?: Platform[];
 };
 
+// The main component for the public profile page. It receives the handle as a parameter, 
+// fetches the profile data from the API, and renders it.
 export default async function PublicProfilePage({
+    // The 'params' object contains the dynamic route parameters, in this case, 
+    // the 'handle' which is used to fetch the profile data.
     params,
 }: {
     params: Promise<{ handle: string }>;
 }) {
     const { handle } = await params;
 
+    //
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/profile/by-handle?handle=${encodeURIComponent(handle)}`,
         { cache: "no-store" }
     );
 
+    // Parse the JSON response from the API and cast it to the defined ApiResponse 
+    // type for better type safety.
     const data = (await res.json()) as ApiResponse;
 
+    // If the response is not OK, or if the API response indicates an error, 
+    // or if the profile data is missing,
     if (!res.ok || !data.ok || !data.profile) {
         return (
             <div className="p-6">
@@ -42,6 +55,8 @@ export default async function PublicProfilePage({
         );
     }
 
+    // If the profile data is successfully retrieved, 
+    // we extract the profile information and platforms
     const p = data.profile;
     const platforms = data.platforms || [];
 

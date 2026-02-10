@@ -69,18 +69,19 @@ async function findUniqueHandle(base: string) {
 // 3. Checks if a profile already exists for the user ID. If it does, it may sync the handle/display_name/avatar if the existing handle looks like a generated placeholder.
 // 4. If no profile exists, it creates a new one with the generated handle and other default values.
 export async function POST() {
-    const { userId } = await auth();
+    try {
+        const { userId } = await auth();
 
-    // If the user is not authenticated, return a 401 Unauthorized response. This ensures that only authenticated users can create or sync profiles.
-    if (!userId) {
-        return Response.json({ error: "Unauthorized" }, { status: 401 });
-    }
+        // If the user is not authenticated, return a 401 Unauthorized response. This ensures that only authenticated users can create or sync profiles.
+        if (!userId) {
+            return Response.json({ error: "Unauthorized" }, { status: 401 });
+        }
 
-    // Pull data from Clerk (used for both create and sync)
-    const user = await currentUser();
+        // Pull data from Clerk (used for both create and sync)
+        const user = await currentUser();
 
-    // Generate a base handle using the Clerk username or email prefix. If neither is available, use a fallback based on the user ID.
-    const clerkUsername = user?.username ?? "";
+        // Generate a base handle using the Clerk username or email prefix. If neither is available, use a fallback based on the user ID.
+        const clerkUsername = user?.username ?? "";
     // Extract the email prefix (the part before the @) to use as a potential handle if the username is not available. This provides a more user-friendly default handle.
     const email = user?.emailAddresses?.[0]?.emailAddress ?? "";
     // The raw handle is determined by the following priority:
@@ -114,8 +115,7 @@ export async function POST() {
         .eq("id", userId)
         .maybeSingle();
 
-    // If there's an error checking for the existing profile, return a 500 Internal Server Error response with the error message. 
-    // This ensures that any issues with the database query are properly communicated to the client.
+    // If there's an error checking for the existing profile, return a 500 Internal Server Error response with the error message.
     if (existingProfile.error) {
         return Response.json({ error: existingProfile.error.message }, { status: 500 });
     }
@@ -180,7 +180,11 @@ export async function POST() {
         return Response.json({ error: created.error.message }, { status: 500 });
     }
 
-    // If the profile was created successfully, return a response indicating that the profile was created with the new 
+    // If the profile was created successfully, return a response indicating that the profile was created with the new
     // unique handle.
     return Response.json({ ok: true, created: true, synced: false, handle: uniqueHandle });
+    } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        return Response.json({ error: message }, { status: 500 });
+    }
 }

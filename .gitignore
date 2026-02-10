@@ -6,6 +6,9 @@ node_modules/
 out/
 .vercel/
 
+# clerk configuration (can include secrets)
+/.clerk/
+
 # Build / coverage
 dist/
 build/

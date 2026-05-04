@@ -1,12 +1,92 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 export default function Page() {
+    const mainRef = useRef<HTMLElement | null>(null);
+    const targetRef = useRef({ x: 50, y: 50 });
+    const sparkleTrailRef = useRef([
+        { x: 50, y: 50 },
+        { x: 50, y: 50 },
+        { x: 50, y: 50 },
+        { x: 50, y: 50 },
+        { x: 50, y: 50 },
+    ]);
+    const opacityRef = useRef(0);
+    const targetOpacityRef = useRef(0);
+
+    function updateGlow(clientX: number, clientY: number) {
+        const node = mainRef.current;
+        if (!node) return;
+
+        const rect = node.getBoundingClientRect();
+        targetRef.current = {
+            x: ((clientX - rect.left) / rect.width) * 100,
+            y: ((clientY - rect.top) / rect.height) * 100,
+        };
+        targetOpacityRef.current = 1;
+    }
+
+    useEffect(() => {
+        let frame = 0;
+
+        const animate = () => {
+            const node = mainRef.current;
+            if (!node) return;
+
+            sparkleTrailRef.current[0].x += (targetRef.current.x - sparkleTrailRef.current[0].x) * 0.24;
+            sparkleTrailRef.current[0].y += (targetRef.current.y - sparkleTrailRef.current[0].y) * 0.24;
+
+            for (let i = 1; i < sparkleTrailRef.current.length; i += 1) {
+                sparkleTrailRef.current[i].x += (sparkleTrailRef.current[i - 1].x - sparkleTrailRef.current[i].x) * 0.18;
+                sparkleTrailRef.current[i].y += (sparkleTrailRef.current[i - 1].y - sparkleTrailRef.current[i].y) * 0.18;
+            }
+
+            opacityRef.current += (targetOpacityRef.current - opacityRef.current) * 0.12;
+
+            node.style.setProperty("--glow-x", `${sparkleTrailRef.current[0].x}%`);
+            node.style.setProperty("--glow-y", `${sparkleTrailRef.current[0].y}%`);
+            node.style.setProperty("--spark-1-x", `${sparkleTrailRef.current[1].x}%`);
+            node.style.setProperty("--spark-1-y", `${sparkleTrailRef.current[1].y}%`);
+            node.style.setProperty("--spark-2-x", `${sparkleTrailRef.current[2].x}%`);
+            node.style.setProperty("--spark-2-y", `${sparkleTrailRef.current[2].y}%`);
+            node.style.setProperty("--spark-3-x", `${sparkleTrailRef.current[3].x}%`);
+            node.style.setProperty("--spark-3-y", `${sparkleTrailRef.current[3].y}%`);
+            node.style.setProperty("--spark-4-x", `${sparkleTrailRef.current[4].x}%`);
+            node.style.setProperty("--spark-4-y", `${sparkleTrailRef.current[4].y}%`);
+            node.style.setProperty("--glow-opacity", opacityRef.current.toString());
+
+            frame = window.requestAnimationFrame(animate);
+        };
+
+        frame = window.requestAnimationFrame(animate);
+
+        return () => window.cancelAnimationFrame(frame);
+    }, []);
+
     return (
-        <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 motion-safe:animate-[heroShellIn_900ms_cubic-bezier(0.16,1,0.3,1)_both]">
+        <main
+            ref={mainRef}
+            className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 motion-safe:animate-[heroShellIn_900ms_cubic-bezier(0.16,1,0.3,1)_both]"
+            onPointerMove={(event) => updateGlow(event.clientX, event.clientY)}
+            onPointerEnter={(event) => updateGlow(event.clientX, event.clientY)}
+            onPointerLeave={() => {
+                targetOpacityRef.current = 0;
+            }}
+        >
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 bg-black/18 motion-safe:animate-[heroBackdropIn_1400ms_ease-out_both]"
+            />
+            <div
+                aria-hidden="true"
+                className="interactive-dot-glow-tail pointer-events-none absolute inset-0"
+            />
+            <div
+                aria-hidden="true"
+                className="interactive-dot-glow pointer-events-none absolute inset-0"
             />
             <div
                 aria-hidden="true"

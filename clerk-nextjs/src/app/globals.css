@@ -50,6 +50,17 @@
 
 :root {
   --radius: 0.625rem;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --spark-1-x: 50%;
+  --spark-1-y: 50%;
+  --spark-2-x: 50%;
+  --spark-2-y: 50%;
+  --spark-3-x: 50%;
+  --spark-3-y: 50%;
+  --spark-4-x: 50%;
+  --spark-4-y: 50%;
+  --glow-opacity: 0;
   --background: oklch(0 0 0);
   --foreground: oklch(1 0 0);
   --card: oklch(1 0 0);
@@ -130,9 +141,43 @@
     @apply bg-background text-foreground;
     min-height: 100vh;
     background-color: #000;
-    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.2) 0.6px, transparent 0.8px);
+    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.28) 0.6px, transparent 0.8px);
     background-size: 11px 11px;
   }
+}
+
+.interactive-dot-glow-tail {
+  opacity: calc(var(--glow-opacity) * 0.82);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.72) 0.8px, transparent 1px);
+  background-size: 11px 11px;
+  -webkit-mask-image:
+    radial-gradient(80px circle at var(--spark-1-x) var(--spark-1-y), rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.26) 42%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(68px circle at var(--spark-2-x) var(--spark-2-y), rgba(0, 0, 0, 0.76) 0%, rgba(0, 0, 0, 0.2) 42%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(56px circle at var(--spark-3-x) var(--spark-3-y), rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(46px circle at var(--spark-4-x) var(--spark-4-y), rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.12) 42%, rgba(0, 0, 0, 0) 100%);
+  mask-image:
+    radial-gradient(80px circle at var(--spark-1-x) var(--spark-1-y), rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.26) 42%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(68px circle at var(--spark-2-x) var(--spark-2-y), rgba(0, 0, 0, 0.76) 0%, rgba(0, 0, 0, 0.2) 42%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(56px circle at var(--spark-3-x) var(--spark-3-y), rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.16) 42%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(46px circle at var(--spark-4-x) var(--spark-4-y), rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.12) 42%, rgba(0, 0, 0, 0) 100%);
+}
+
+.interactive-dot-glow {
+  opacity: var(--glow-opacity);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 1) 0.85px, transparent 1px);
+  background-size: 11px 11px;
+  -webkit-mask-image: radial-gradient(
+    88px circle at var(--glow-x) var(--glow-y),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.5) 38%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    88px circle at var(--glow-x) var(--glow-y),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.5) 38%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 @keyframes heroShellIn {

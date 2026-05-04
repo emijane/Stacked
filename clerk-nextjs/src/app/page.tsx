@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Page() {
     return (
@@ -66,6 +67,36 @@ export default function Page() {
                         </svg>
                     </a>
                 </div>
+            </div>
+            <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-center">
+                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm font-medium leading-5">
+                    <p className="text-transparent bg-gradient-to-r from-slate-100 via-zinc-100 to-slate-300 bg-clip-text drop-shadow-[0_0_10px_rgba(255,255,255,0.12)]">
+                        developed by{" "}
+                        <Link
+                            href="https://x.com/pcexplodes"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-semibold text-transparent bg-gradient-to-r from-white via-slate-100 to-zinc-200 bg-clip-text transition-all hover:from-white hover:via-white hover:to-slate-100"
+                        >
+                            emi
+                        </Link>
+                    </p>
+                    <span className="text-white/28">/</span>
+                    <p className="text-transparent bg-gradient-to-r from-orange-100 via-rose-100 to-pink-100 bg-clip-text drop-shadow-[0_0_14px_rgba(251,113,133,0.4)]">
+                        logo art by{" "}
+                        <Link
+                            href="https://ioananenciu.carrd.co/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-semibold text-transparent bg-gradient-to-r from-white via-rose-100 to-orange-100 bg-clip-text transition-all hover:from-white hover:via-white hover:to-rose-100"
+                        >
+                            neo ˃ 𖥦 ˂
+                        </Link>
+                    </p>
+                </div>
+                <p className="text-xs font-medium tracking-[0.08em] text-white/38">
+                    © 2026 overclock.lol. All rights reserved.
+                </p>
             </div>
         </main>
     );

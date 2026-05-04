@@ -12,7 +12,7 @@ import {
 
 export function NavigationMenuComponent() {
     return (
-        <div className="w-full flex justify-between">
+        <div className="flex w-full justify-between">
             <div>
                 <h1 className="text-2xl font-bold">Stacked</h1>
             </div>
@@ -26,13 +26,7 @@ export function NavigationMenuComponent() {
 
                     <NavigationMenuItem>
                         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                            <Link href="http://localhost:3000/u/emi">Profile</Link>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                            <Link href="http://localhost:3000/settings/profile">Settings</Link>
+                            <Link href="/u/emi">Profile</Link>
                         </NavigationMenuLink>
                     </NavigationMenuItem>
                 </NavigationMenuList>

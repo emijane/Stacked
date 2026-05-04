@@ -3,20 +3,20 @@ import Link from "next/link";
 
 export default function Page() {
     return (
-        <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
+        <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 motion-safe:animate-[heroShellIn_900ms_cubic-bezier(0.16,1,0.3,1)_both]">
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-black/18"
+                className="pointer-events-none absolute inset-0 bg-black/18 motion-safe:animate-[heroBackdropIn_1400ms_ease-out_both]"
             />
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 shadow-[inset_0_0_180px_rgba(0,0,0,0.55)]"
+                className="pointer-events-none absolute inset-0 shadow-[inset_0_0_180px_rgba(0,0,0,0.55)] motion-safe:animate-[heroVignetteIn_1200ms_ease-out_both]"
             />
             <div className="relative flex max-w-3xl flex-col items-center gap-6 sm:gap-7">
-                <div className="rounded-full border border-[#e23d39]/30 bg-white/[0.025] px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-white/62 shadow-[0_0_18px_rgba(226,61,57,0.14)]">
+                <div className="rounded-full border border-[#e23d39]/30 bg-white/[0.025] px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.12em] text-white/62 shadow-[0_0_18px_rgba(226,61,57,0.14)] motion-safe:animate-[heroItemIn_720ms_cubic-bezier(0.16,1,0.3,1)_120ms_both]">
                     Beta Testing Coming Soon
                 </div>
-                <div className="flex items-end gap-3.5 sm:gap-4">
+                <div className="flex items-end gap-3.5 sm:gap-4 motion-safe:animate-[heroItemIn_720ms_cubic-bezier(0.16,1,0.3,1)_220ms_both]">
                     <Image
                         src="/kitty-red-cross-white-border.png"
                         alt=""
@@ -30,12 +30,12 @@ export default function Page() {
                         <span className="ml-[0.04em] text-white/64 sm:text-[0.91em]">.lol</span>
                     </h1>
                 </div>
-                <p className="max-w-[34rem] text-center text-[15px] font-normal leading-[1.38] text-white/70 sm:text-lg">
+                <p className="max-w-[34rem] text-center text-[15px] font-normal leading-[1.38] text-white/70 motion-safe:animate-[heroItemIn_720ms_cubic-bezier(0.16,1,0.3,1)_320ms_both] sm:text-lg">
                     No more randoms. No more wasted games.
                     <br />
                     Find Overwatch players who match your skill, role, and mindset.
                 </p>
-                <div className="mt-1 flex items-center gap-2.5">
+                <div className="mt-1 flex items-center gap-2.5 motion-safe:animate-[heroItemIn_720ms_cubic-bezier(0.16,1,0.3,1)_420ms_both]">
                     <a
                         href="https://discord.gg/8ZKUUjMtG"
                         target="_blank"
@@ -68,7 +68,7 @@ export default function Page() {
                     </a>
                 </div>
             </div>
-            <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-center">
+            <div className="absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 text-center motion-safe:animate-[heroFooterIn_900ms_cubic-bezier(0.16,1,0.3,1)_560ms_both]">
                 <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm font-medium leading-5">
                     <p className="text-transparent bg-gradient-to-r from-slate-100 via-zinc-100 to-slate-300 bg-clip-text drop-shadow-[0_0_10px_rgba(255,255,255,0.12)]">
                         developed by{" "}

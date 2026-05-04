@@ -23,12 +23,6 @@ export function NavigationMenuComponent() {
                             <Link href="/">Home</Link>
                         </NavigationMenuLink>
                     </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                            <Link href="/u/emi">Profile</Link>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
         </div>

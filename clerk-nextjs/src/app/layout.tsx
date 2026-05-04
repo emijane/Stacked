@@ -1,12 +1,6 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { NavigationMenuComponent } from '@/components/header/NavigationMenu'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
@@ -15,7 +9,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Stacked',
-  description: 'Find teammates and build your profile.',
+  description: 'Coming Soon',
 }
 
 export default function RootLayout({
@@ -25,10 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <header className="p-4">
-          <NavigationMenuComponent />
-        </header>
+      <body className={`${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>
